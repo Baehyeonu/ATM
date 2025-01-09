@@ -59,5 +59,4 @@
 
 ## 📧 문의
 개발과 관련된 질문이 있다면 언제든지 아래 이메일로 문의해주세요:
-- **Email**: example@bankservice.com
-```
+- **Email**: wea3113@gmail.com
