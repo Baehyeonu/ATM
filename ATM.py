@@ -8,6 +8,8 @@
 #가지고 있는 금액보다 출금을 원하는 금액이 클때 가지고 있는 금액만 출금 되도록 작성해 주세요.
 #단, 영수증에 내역을 변경되지 않아야 하며 입금 또는 출금이 진행될대마다 이력이 기록됩니다.
 #영수증 변수는 : receipts
+# 입력 검증 및 에러 처리추가, 잘못된 입력 값(숫자가 아닌값, 음수 값 등)
+# 유효하지 않는 메뉴 선택 시 경고 메세지 또는 사용방법 재안내를 해주세요.
 
 receipts = [()] 
 balnce = 3000
@@ -19,9 +21,13 @@ while True:
         break
     if num == '1':
         deporsit_amout = int(input('입금하실 금액을 입력해 주세요. : '))
-        balnce = balnce + deporsit_amout
-        receipts.append(("입금", deporsit_amout, balnce))
-        print(f'입금하신 금액은 {deporsit_amout}원이고, 현재 잔액은 {balnce}원 입니다.')
+        if deporsit_amout.isdigit() and int(deporsit_amout) > 0: #1000 -> True, 천원 -> False
+            balnce = balnce + int(deporsit_amout)
+            receipts.append(("입금", deporsit_amout, balnce))
+            print(f'입금하신 금액은 {deporsit_amout}원이고, 현재 잔액은 {balnce}원 입니다.')
+        else:
+            print("입금한 금액을 숫자 형태와 음수가 아닌값을 입력해주세요.")
+            
     if num == '2':
         withdraw_amout = int(input("출금 하실 금액을 입력해 주세요. : "))
         withdraw_amout = min(balnce, withdraw_amout)
