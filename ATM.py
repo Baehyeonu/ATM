@@ -11,7 +11,7 @@
 # 입력 검증 및 에러 처리추가, 잘못된 입력 값(숫자가 아닌값, 음수 값 등)
 # 유효하지 않는 메뉴 선택 시 경고 메세지 또는 사용방법 재안내를 해주세요.
 
-receipts = [()] 
+receipts = [] 
 balnce = 3000
 
 while True:
@@ -20,11 +20,11 @@ while True:
     if num == '4':
         break
     if num == '1':
-        deporsit_amout = int(input('입금하실 금액을 입력해 주세요. : '))
-        if deporsit_amout.isdigit() and int(deporsit_amout) > 0: #1000 -> True, 천원 -> False
-            balnce = balnce + int(deporsit_amout)
-            receipts.append(("입금", deporsit_amout, balnce))
-            print(f'입금하신 금액은 {deporsit_amout}원이고, 현재 잔액은 {balnce}원 입니다.')
+        deposit_amount = input('입금하실 금액을 입력해 주세요. : ')
+        if deposit_amount.isdigit() and int(deposit_amount) > 0: #1000 -> True, 천원 -> False
+            balnce = balnce + int(deposit_amount)
+            receipts.append(("입금", deposit_amount, balnce))
+            print(f'입금하신 금액은 {deposit_amount}원이고, 현재 잔액은 {balnce}원 입니다.')
         else:
             print("입금한 금액을 숫자 형태와 음수가 아닌값을 입력해주세요.")
             
@@ -34,4 +34,14 @@ while True:
         balnce -= withdraw_amout
         receipts.append(("출금", withdraw_amout, balnce))
         print(f'출금하신 금액은 {withdraw_amout}원이고, 현재 잔액은 {balnce}원 입니다.')
+
+    if num == '3':
+        if receipts:
+            print("===영수중===")
+            for i in receipts:
+                print(f'{i[0]}: {i[1]}원, 잔액:{i[2]}원 입니다')
+        else:
+            print("영수증 내력이 없습니다")
+
+
 print(f'서비스를 종류합니다. 현재 남은 금액은{balnce}입니다.')
